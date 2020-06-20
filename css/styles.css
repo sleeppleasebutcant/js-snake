@@ -5,5 +5,7 @@ body,html {
 .my-big-btn {
     width:40%;
     height:20%;
-    
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 300%;
+    color: black;
 }
