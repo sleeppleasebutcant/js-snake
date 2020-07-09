@@ -1,10 +1,12 @@
 
 
 import { Snake, DIRECTION } from "./snake_logic.js";
+import range, * as utils from "./utils.js";
 var KEYS = []
 var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
 
 var snake = new Snake(10);
+var snakeFillStyle;
 var offset = 0;
 
 
@@ -30,9 +32,10 @@ function clearCanvas()
 function draw() {
     console.log('clearing...');
     console.log("w,h: ", canvas.width, canvas.height);
-
+    
     clearCanvas();
 
+    context.fillStyle = snakeFillStyle;
     context.rect(snake.head.x + offset, snake.head.y + offset, 1, 1);
     
     for (let i = 0; i < snake.body.length; i++) {
@@ -70,7 +73,22 @@ $(document).on("keydown", function (e) {
 });
 
 
+function setSnakeLook()
+{
+    //rainbow
+    snakeFillStyle = context.createRadialGradient(50, 20, 1, 90, 60, 100);
+    snakeFillStyle.addColorStop(0, utils.randomColor());
+    for(let i in range(100))
+    {
+        snakeFillStyle.addColorStop(0.01*i, utils.randomColor());
+    }
+    snakeFillStyle.addColorStop(1, utils.randomColor());    
+}
+
+
+
+setSnakeLook();
 context.scale(10,10);
 
-setInterval(gameLoop, 333);
+setInterval(gameLoop, 100  );
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);
