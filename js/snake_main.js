@@ -24,16 +24,15 @@ function draw() {
     context.beginPath();
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+
     context.rect(snake.head.x + offset, snake.head.y + offset, 1, 1);
-    context.fill();
     
     for (let i = 0; i < snake.body.length; i++) {
         console.log(snake.head.x);
         //console.log(pixel, snake.body[i].x + offset, snake.body[i].y + offset);
-        context.rect(snake.body[i].x + offset, snake.body[i].y + offset , 1, 1);
-        context.fill();
-        
+        context.rect(snake.body[i].x + offset, snake.body[i].y + offset , 1, 1);        
     }
+    context.fill();
 
 }
 
@@ -65,5 +64,5 @@ $(document).on("keydown", function (e) {
 
 context.scale(5,5);
 
-setInterval(gameLoop, 100);
+setInterval(gameLoop, 333);
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);
