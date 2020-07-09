@@ -2,17 +2,21 @@
 
 import { Snake, DIRECTION } from "./snake_logic.js";
 import range, * as utils from "./utils.js";
-var KEYS = []
-var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
-
-var snake = new Snake(10);
-var snakeFillStyle;
-var offset = 0;
-
 
 const canvas = document.getElementById("map");
 /** @type {CanvasRenderingContext2D} */
 const context = canvas.getContext("2d");
+const scaleX=10; const  scaleY=10;
+
+var KEYS = []
+var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
+
+var snake = new Snake(10, canvas.width/scaleX, canvas.height/scaleY, 0, 0);
+var snakeFillStyle;
+var offset = 0;
+
+
+
 
 
 
@@ -96,7 +100,7 @@ function setSnakeLook()
 
 
 setSnakeLook();
-context.scale(10,10);
+context.scale(scaleX, scaleY);
 
-setInterval(gameLoop, 150  );
+setInterval(gameLoop, 150);
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);

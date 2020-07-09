@@ -5,10 +5,14 @@ var DIRECTION = { up: "up", down: "down", left: "left", right: "right" };
 
 
 class Snake {
-    constructor(len) {
+    constructor(len, maxX=null,maxY=null, minX=null, minY=null) {
         this.len = len;
         this.head = { direction: DIRECTION.right, x: 0, y: 0 };
         this.body = [];
+        this.maxX = maxX;
+        this.maxY = maxY;
+        this.minX=minX;
+        this.minY=minY;
         for(let i in range(len))
         {
             this.grow();
@@ -20,6 +24,12 @@ class Snake {
     {
         let nextHead = {x : this.head.x +  this.directionToOffset(this.head.direction).x,
         y: this.head.y + this.directionToOffset(this.head.direction).y};
+
+        if(this.maxX!=null && nextHead.x>=this.maxX) return false;
+        if(this.maxY!=null && nextHead.y>=this.maxY) return false;
+        if(this.minY!=null && nextHead.y<this.minY) return false;
+        if(this.minX!=null && nextHead.x<this.minX) return false;
+
         for(let i=0; i<this.body.length; i++ )
         {
             let el = this.body[i];
