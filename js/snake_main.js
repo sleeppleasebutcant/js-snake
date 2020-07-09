@@ -98,5 +98,5 @@ function setSnakeLook()
 setSnakeLook();
 context.scale(10,10);
 
-setInterval(gameLoop, 100  );
+setInterval(gameLoop, 150  );
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);

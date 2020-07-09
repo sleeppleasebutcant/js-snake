@@ -15,6 +15,24 @@ class Snake {
         }
 
     }
+    
+    isTickPossible()
+    {
+        let nextHead = {x : this.head.x +  this.directionToOffset(this.head.direction).x,
+        y: this.head.y + this.directionToOffset(this.head.direction).y};
+        for(let i=0; i<this.body.length; i++ )
+        {
+            let el = this.body[i];
+            if(el.x==nextHead.x && el.y==nextHead.y)
+            {
+                console.log("collision");
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     turnLeft(){this.head.direction=DIRECTION.left;}
     turnRight(){this.head.direction=DIRECTION.right;}
@@ -23,6 +41,9 @@ class Snake {
 
     tick()
     {
+
+        if(!this.isTickPossible()) return false;
+
         this.head.x += this.directionToOffset(this.head.direction).x;       
         this.head.y += this.directionToOffset(this.head.direction).y;
 
