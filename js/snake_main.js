@@ -70,7 +70,7 @@ $(document).on("keydown", function (e) {
 });
 
 
-context.scale(5,5);
+context.scale(10,10);
 
 setInterval(gameLoop, 333);
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);
