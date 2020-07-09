@@ -75,7 +75,7 @@ $(document).on("keydown", function (e) {
 
 function setSnakeLook()
 {
-    //rainbow
+    //gradient - rainbow
     snakeFillStyle = context.createRadialGradient(50, 20, 1, 90, 60, 100);
     snakeFillStyle.addColorStop(0, utils.randomColor());
     for(let i in range(100))
@@ -83,6 +83,14 @@ function setSnakeLook()
         snakeFillStyle.addColorStop(0.01*i, utils.randomColor());
     }
     snakeFillStyle.addColorStop(1, utils.randomColor());    
+
+    // shadow
+    context.shadowColor = 'grey';
+    context.shadowOffsetX=7;
+    context.shadowOffsetY=5;
+    context.shadowBlur=9;
+
+
 }
 
 
