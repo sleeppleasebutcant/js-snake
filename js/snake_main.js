@@ -4,7 +4,7 @@ import { Snake, DIRECTION } from "./snake_logic.js";
 var KEYS = []
 var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
 
-var snake = new Snake(5);
+var snake = new Snake(10);
 var offset = 0;
 
 
@@ -17,13 +17,21 @@ const context = canvas.getContext("2d");
 var pixel = context.createImageData(1, 1);
 pixel.data[0] = 0; pixel.data[1] = 0; pixel.data[2] = 0; pixel.data[3] = 0xff;
 
+
+function clearCanvas()
+{
+    context.beginPath();
+    var old = context.fillStyle;
+    context.fillStyle="palegreen";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle=old;
+}
+
 function draw() {
     console.log('clearing...');
     console.log("w,h: ", canvas.width, canvas.height);
 
-    context.beginPath();
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
+    clearCanvas();
 
     context.rect(snake.head.x + offset, snake.head.y + offset, 1, 1);
     
