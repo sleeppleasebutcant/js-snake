@@ -4,7 +4,7 @@ import { Snake, DIRECTION } from "./snake_logic.js";
 var KEYS = []
 var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
 
-var snake = new Snake(1000);
+var snake = new Snake(4);
 var offset = 0;
 
 
@@ -15,7 +15,7 @@ const context = canvas.getContext("2d");
 
 
 var pixel = context.createImageData(1, 1);
-pixel.data[0] = 0xff; pixel.data[1] = 0; pixel.data[2] = 0; pixel.data[3] = 0xff;
+pixel.data[0] = 0; pixel.data[1] = 0; pixel.data[2] = 0; pixel.data[3] = 0xff;
 
 function draw() {
     console.log('clearing...');
@@ -23,9 +23,12 @@ function draw() {
     for (let i = 0; i < snake.body.length; i++) {
         console.log(snake.head.x);
         //console.log(pixel, snake.body[i].x + offset, snake.body[i].y + offset);
-        context.putImageData(pixel, snake.head.x + offset, snake.head.y + offset);
-        context.putImageData(pixel, snake.body[i].x + offset, snake.body[i].y + offset);
+        context.rect(snake.head.x + offset, snake.head.y + offset, 1, 1);
+        context.rect(snake.body[i].x + offset, snake.body[i].y + offset , 1, 1);
+        context.fill();
+        
     }
+
 }
 
 
@@ -54,6 +57,7 @@ $(document).on("keydown", function (e) {
 });
 
 
+context.scale(5,5);
 
 setInterval(gameLoop, 100);
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);
