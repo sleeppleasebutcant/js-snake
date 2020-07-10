@@ -8,18 +8,18 @@ const canvas = document.getElementById("map");
 const context = canvas.getContext("2d");
 const scaleX=10; const  scaleY=10;
 var gameSpeed=150; //lower the faster
+var foodFrequency=0.05; // higher the higher
+
+
 
 var KEYS = []
 var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
 
+var FoodCollection = [];
+
 var snake = new Snake(10, canvas.width/scaleX, canvas.height/scaleY, 0, 0);
 var snakeFillStyle;
 var offset = 0;
-
-
-
-
-
 
 var pixel = context.createImageData(1, 1);
 pixel.data[0] = 0; pixel.data[1] = 0; pixel.data[2] = 0; pixel.data[3] = 0xff;
@@ -49,19 +49,49 @@ function draw() {
         context.rect(snake.body[i].x + offset, snake.body[i].y + offset , 1, 1);        
     }
     context.fill();
+    context.beginPath();
+
+    context.fillStyle = "black";
+    for(let i=0; i < FoodCollection.length; i++)
+    {
+        context.rect(FoodCollection[i].x, FoodCollection[i].y, 1, 1);
+    }
+
+    context.fill();
 
 }
+
+
+
+
 
 
 
 function gameLoop() {
     console.log("tick");
     console.log(snake);
+
+    if(Math.random()<foodFrequency)
+    {
+        FoodCollection.push({x: Math.round(Math.round(Math.random()*1000%canvas.width)/scaleX),
+                             y: Math.round(Math.round(Math.random()*1000%canvas.height)/scaleY)});
+    }
     snake.tick();   
+
+    if(FoodCollection.some((f) => utils.doCoexist(f, snake.head)))
+    {
+        snake.grow();
+        FoodCollection.splice(FoodCollection.findIndex(f => utils.doCoexist(f, snake.head)), 1);
+    }
     draw();
+    
+    
     gameSpeed = KEYS[32] ? 40 : 150; // if space then game speeds up
     setTimeout(gameLoop, gameSpeed);
 }
+
+
+
 
 $(document).on("keydown", function (e) {
     console.log("keycode:" + e.which);

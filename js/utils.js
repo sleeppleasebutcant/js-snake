@@ -15,3 +15,8 @@ export function randomColor()
     }
     return r;
 }
+
+export function doCoexist(a, b)
+{
+    return a.x==b.x && a.y==b.y;
+}
