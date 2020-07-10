@@ -7,6 +7,7 @@ const canvas = document.getElementById("map");
 /** @type {CanvasRenderingContext2D} */
 const context = canvas.getContext("2d");
 const scaleX=10; const  scaleY=10;
+var gameSpeed=150; //lower the faster
 
 var KEYS = []
 var ARROW_KEY = { up: 87, down: 83, right: 68, left: 65 };
@@ -58,6 +59,8 @@ function gameLoop() {
     console.log(snake);
     snake.tick();   
     draw();
+    gameSpeed = KEYS[32] ? 40 : 150; // if space then game speeds up
+    setTimeout(gameLoop, gameSpeed);
 }
 
 $(document).on("keydown", function (e) {
@@ -102,5 +105,6 @@ function setSnakeLook()
 setSnakeLook();
 context.scale(scaleX, scaleY);
 
-setInterval(gameLoop, 150);
+setTimeout(gameLoop, gameSpeed);
 document.addEventListener("keydown", e => KEYS[e.keyCode] = true, false);
+document.addEventListener("keyup", e => KEYS[e.keyCode] = false, false);
