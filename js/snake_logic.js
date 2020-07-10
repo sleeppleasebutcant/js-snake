@@ -74,6 +74,7 @@ class Snake {
                 this.body[i].direction = this.body[i-1].direction;
             }
         }
+        return true;
     }
     grow() {
         if (this.body.length == 0) {

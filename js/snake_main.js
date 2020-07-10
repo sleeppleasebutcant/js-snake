@@ -76,13 +76,18 @@ function gameLoop() {
         FoodCollection.push({x: Math.round(Math.round(Math.random()*1000%canvas.width)/scaleX),
                              y: Math.round(Math.round(Math.random()*1000%canvas.height)/scaleY)});
     }
-    snake.tick();   
+    if(snake.tick()==false) window.location.href="./";   
+
+
 
     if(FoodCollection.some((f) => utils.doCoexist(f, snake.head)))
     {
         snake.grow();
         FoodCollection.splice(FoodCollection.findIndex(f => utils.doCoexist(f, snake.head)), 1);
     }
+
+    document.getElementById("len-bdg").innerHTML=snake.body.length;
+
     draw();
     
     
