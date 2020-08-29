@@ -1,11 +1,10 @@
 
-
-export default function range(n)
+function range(n)
 {
     return new Array(n).fill(0);
 }
 
-export function randomColor()
+ function randomColor()
 {
     let alph='0123456789abcdef';
     let r = "#";
@@ -16,7 +15,7 @@ export function randomColor()
     return r;
 }
 
-export function doCoexist(a, b)
+ function doCoexist(a, b)
 {
     return a.x==b.x && a.y==b.y;
 }

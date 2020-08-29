@@ -1,4 +1,3 @@
-import range from './utils.js'
 
 var DIRECTION = { up: "up", down: "down", left: "left", right: "right" };
 
@@ -44,10 +43,10 @@ class Snake {
 
 
 
-    turnLeft(){this.head.direction=DIRECTION.left;}
-    turnRight(){this.head.direction=DIRECTION.right;}
-    turnUp(){this.head.direction=DIRECTION.up;}
-    turnDown(){this.head.direction=DIRECTION.down;}
+    turnLeft(){if(this.head.direction!=DIRECTION.right) this.head.direction=DIRECTION.left;}
+    turnRight(){if(this.head.direction!=DIRECTION.left)this.head.direction=DIRECTION.right;}
+    turnUp(){if(this.head.direction!=DIRECTION.downt)this.head.direction=DIRECTION.up;}
+    turnDown(){if(this.head.direction!=DIRECTION.up)this.head.direction=DIRECTION.down;}
 
     tick()
     {
@@ -112,4 +111,3 @@ class Snake {
 
 }
 
-export {DIRECTION, Snake};
